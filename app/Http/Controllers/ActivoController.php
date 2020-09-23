@@ -15,6 +15,9 @@ class ActivoController extends Controller
     public function index()
     {
         //
+        $activos = Activo::all();
+        return view('activos.index', compact('activos'));
+
     }
 
     /**
@@ -25,6 +28,7 @@ class ActivoController extends Controller
     public function create()
     {
         //
+        return view('activos.create');
     }
 
     /**
@@ -36,6 +40,26 @@ class ActivoController extends Controller
     public function store(Request $request)
     {
         //
+        $activo = new Activo();
+         //tabla->columna = $request->imput('nombre del input');
+        $activo->numero_serial = $request->input('numeroSerial');
+        $activo->numero_serial_dispositivo = $request->input('numeroSerialDispositivo');
+        $activo->numero_serial_tecNM = $request->input('numeroSerialTecNM');
+        $activo->tipo_activo = $request->input('tipoActivo');
+        $activo->nombre_activo = $request->input('nombreActivo');
+        $activo->fecha_alta = $request->input('fechaAlta');
+        $activo->marca = $request->input('marca');
+        $activo->modelo = $request->input('modelo');
+        $activo->color = $request->input('color');
+        $activo->descripcion = $request->input('descripcion');
+        $activo->imagen = $request->input('imagen');
+        $activo->codigo_qr = $request->input('codigoQR');
+        $activo->tipo_ubicacion = $request->input('tipoUbicacion');
+        $activo->nombre_ubicacion = $request->input('nombreUbicacion');
+        $activo->tipo_estatus = $request->input('tipoEstatus');
+        $activo->save();
+
+        return redirect('/activos')->with('creado', 'Activo creado correctamente');
     }
 
     /**
@@ -47,6 +71,7 @@ class ActivoController extends Controller
     public function show(Activo $activo)
     {
         //
+        return view('activos.show', compact('activo'));
     }
 
     /**
@@ -58,6 +83,7 @@ class ActivoController extends Controller
     public function edit(Activo $activo)
     {
         //
+        return view('activos.edit', compact('activo'));
     }
 
     /**
@@ -70,6 +96,26 @@ class ActivoController extends Controller
     public function update(Request $request, Activo $activo)
     {
         //
+        $activo = new Activo();
+         //tabla->columna = $request->imput('nombre del input');
+        $activo->numero_serial = $request->input('numeroSerial');
+        $activo->numero_serial_dispositivo = $request->input('numeroSerialDispositivo');
+        $activo->numero_serial_tecNM = $request->input('numeroSerialTecNM');
+        $activo->tipo_activo = $request->input('tipoActivo');
+        $activo->nombre_activo = $request->input('nombreActivo');
+        $activo->fecha_alta = $request->input('fechaAlta');
+        $activo->marca = $request->input('marca');
+        $activo->modelo = $request->input('modelo');
+        $activo->color = $request->input('color');
+        $activo->descripcion = $request->input('descripcion');
+        $activo->imagen = $request->input('imagen');
+        $activo->codigo_qr = $request->input('codigoQR');
+        $activo->tipo_ubicacion = $request->input('tipoUbicacion');
+        $activo->nombre_ubicacion = $request->input('nombreUbicacion');
+        $activo->tipo_estatus = $request->input('tipoEstatus');
+        $activo->save();
+
+        return redirect('/activos')->with('Actualizar', 'Activo actualizado correctamente');
     }
 
     /**
@@ -81,5 +127,8 @@ class ActivoController extends Controller
     public function destroy(Activo $activo)
     {
         //
+        $activo = Activo::findDrFail($activo);
+        $activo->delete();
+        return redirect('/activos')->with('eliminar', 'Activo se ha eliminado');
     }
 }

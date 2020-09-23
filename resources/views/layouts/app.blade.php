@@ -73,6 +73,7 @@
         </nav>
 
         <main class="py-4">
+            <!--Archivo maestro, contenido que tenga que ir en todas las vistas-->
             @yield('content')
         </main>
     </div>
